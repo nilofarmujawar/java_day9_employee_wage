@@ -2,10 +2,10 @@ package com.bridgelab;
 
 import java.util.Random;
 
-//uc6
+//uc7
 
 /*
-      Calculate Wages till a condition of total working hours or days is reached for a month
+    Program for calculate the total working hr and day is reached for month
 
  */
 
@@ -25,24 +25,22 @@ class utilityEmpWage {
     public int hrs = 0;
 
     public void present() {
+
         /*
         using while loop
          */
+
         while (workingHr < maxWorkingHr && workingDays < maxWorkingDays) {
             int check = rand.nextInt(3) + 1;
 
-            /*
-            using switch case for
-             */
-
             switch (check) {
-
-                case isPresent : {
-                    System.out.println("Employee is present.");   //condition1
+                case isPresent : {                          //condition 1
+                    System.out.println("Employee is present.");
                     hrs = fullDayHr;
                 }
+
                 case isPartTime : {
-                    System.out.println("Employee is present part time.");   //condition2
+                    System.out.println("Employee is present part time.");  //condition 2
                     hrs = partTimeHr;
                 }
                 case isAbsent : hrs = 0;
