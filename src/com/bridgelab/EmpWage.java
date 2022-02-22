@@ -2,11 +2,12 @@ package com.bridgelab;
 
 import java.util.Random;
 
-//uc4
+//uc5
 
 /*
-      Program Using Switch case Employee is work
+      calculating wages for a month
  */
+
 
 class utilityEmpWage {
     Random rand = new Random();
@@ -21,19 +22,20 @@ class utilityEmpWage {
     public void present() {
         int check = rand.nextInt(3) + 1;
         switch (check) {
+
             case isPresent : {
                 System.out.println("Employee is present.");
-                dailyWage = wagePerHr * fullDayHr;                  //condition 1
+                dailyWage = wagePerHr * fullDayHr;
                 System.out.println("Daily wage is : " + dailyWage);
             }
 
             case isPartTime : {
-                System.out.println("Employee is present part time."); //condition 2
+                System.out.println("Employee is present part time.");
                 dailyWage = wagePerHr * partTimeHr;
                 System.out.println("Daily wage is : " + dailyWage);
             }
 
-            case isAbsent : System.out.println("Employee is absent.");  //default statement
+            case isAbsent : System.out.println("Employee is absent.");
         }
     }
 }
@@ -42,7 +44,7 @@ public class EmpWage {
 
     public static void main(String[] args) {
         System.out.println("Welcome To Employee Wage Computation");
-        utilityEmpWage empWage = new utilityEmpWage(); //create object for utilityEmpWage class
+        utilityEmpWage empWage = new utilityEmpWage();
         empWage.present();
     }
 
