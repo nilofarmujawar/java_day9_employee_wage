@@ -1,51 +1,33 @@
 package com.bridgelab;
 
-import java.util.Random;
-
-//uc3
-
-/*
-Add Part time
-Employee & Wage
- */
-
-
-class utilityEmpWage {
-    Random rand = new Random();
-    public int isPresent = 1;
-    public int isAbsent = 2;
-    public int isPartTime = 3;
-    public int wagePerHr = 20;
-    public int fullDayHr = 8;
-    public int partTimeHr = 4;
-    public int dailyWage ;
-
-
-    public void present() {
-        int check = rand.nextInt(3)+1;
-        if (check == isAbsent) {
-            System.out.println("Employee is absent.");
-
-        }
-        else if (check == isPresent) {
-            System.out.println("Employee is present.");
-            dailyWage = wagePerHr*fullDayHr;
-            System.out.println("Wage of the day is : " + dailyWage) ;
-        }
-        else {
-            System.out.println("Employee is present part time .");
-            dailyWage = wagePerHr*partTimeHr;
-            System.out.println("Wage of the day is " + dailyWage);
-        }
-    }
-}
-
 public class EmpWage {
+    public static void main(String args[]) {
 
-    public static void main(String[] args) {
-        System.out.println("Welcome To Employee Wage Computation");
-        utilityEmpWage empWage = new utilityEmpWage();  //create object
-        empWage.present(); //calling present method
+        // constant
+        final int PART_TIME = 1;  //added part time employee
+        final int FULL_TIME = 2;
+        final int WAGE_PER_HR = 20;
+        int empType = (int) (Math.random() * 100) % 3;
+        int workingHours = 0;
+        /*
+        * if else condition is used for employee
+        * is present for part time or full time
+        */
+        if (empType == FULL_TIME)
+        {
+            System.out.println("Employee is Present Full time");
+            workingHours = 8;
+        } else if (empType == PART_TIME)
+        {
+            System.out.println("Employee is Present Part time");
+            workingHours = 4;
+        } else
+        {
+            System.out.println("Employee is Absent");
+        }
+
+        // calculate daily employee wage.
+        int wage = workingHours * WAGE_PER_HR;
+        System.out.println("Employee Daily Wage is " + wage);
     }
-
 }
