@@ -1,51 +1,41 @@
 package com.bridgelab;
 
-import java.util.Random;
+public class EmpWage{
 
-//uc5
+    public static void main(String args[]) {
 
-/*
-      calculating wages for a month
- */
+        // constant
+        final int PART_TIME = 1;
+        final int FULL_TIME = 2;
+        final int WAGE_PER_HR = 20;
+        final int WORKING_DAYS = 20;
 
-
-class utilityEmpWage {
-    Random rand = new Random();
-    public final int isPresent = 1;
-    public final int isAbsent = 2;
-    public final int isPartTime = 3;
-    public int wagePerHr = 20;
-    public int fullDayHr = 8;
-    public int partTimeHr = 4;
-    public int dailyWage;
-
-    public void present() {
-        int check = rand.nextInt(3) + 1;
-        switch (check) {
-
-            case isPresent : {
-                System.out.println("Employee is present.");
-                dailyWage = wagePerHr * fullDayHr;
-                System.out.println("Daily wage is : " + dailyWage);
+        int totalWage = 0;
+        /*
+              using for loop for calculate monthly wage
+         */
+        for (int day = 1; day <= WORKING_DAYS; day++) {
+            int empType = (int) (Math.random() * 100) % 3;
+            int workingHours =0;
+            
+            /*
+            using switch case 
+             */
+            switch (empType)
+            {
+                case FULL_TIME:
+                    workingHours = 8;
+                    break;
+                case PART_TIME:
+                    workingHours = 4;
+                    break;
+                default:
             }
-
-            case isPartTime : {
-                System.out.println("Employee is present part time.");
-                dailyWage = wagePerHr * partTimeHr;
-                System.out.println("Daily wage is : " + dailyWage);
-            }
-
-            case isAbsent : System.out.println("Employee is absent.");
+            //calculate daily empwage
+            int wage = workingHours * WAGE_PER_HR;
+            System.out.println("Day " + day + " wage is:" + wage);
+            totalWage += wage; //monthly wage
         }
+        System.out.println("Total wage for a month is " + totalWage);
     }
-}
-
-public class EmpWage {
-
-    public static void main(String[] args) {
-        System.out.println("Welcome To Employee Wage Computation");
-        utilityEmpWage empWage = new utilityEmpWage();
-        empWage.present();
-    }
-
 }
