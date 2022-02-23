@@ -1,65 +1,53 @@
 package com.bridgelab;
 
-import java.util.Random;
-
-//uc8
-
-/*
-    Compute Employee Wage
-for multiple companies
-
- */
-
-class utilityEmpWage {
-    Random rand = new Random();
-    public final int isPresent = 1;
-    public final int isAbsent = 2;
-    public final int isPartTime = 3;
-    public int wagePerHr = 20;
-    public int fullDayHr = 8;
-    public int partTimeHr = 4;
-    public int maxWorkingDays = 20;
-    public int workingDays = 0;
-    public  int maxWorkingHr = 100;
-    public int workingHr = 0;
-    public int dailyWage;
-    public int hrs = 0;
-
-    public void present(String name, int wagePerHr, int maxWorkingDays, int maxWorkingHr) {
-        while (workingHr < maxWorkingHr && workingDays < maxWorkingDays) {
-            int check = rand.nextInt(3) + 1;
-
-            switch (check) {
-
-                case isPresent : {                               //condition 1
-                    System.out.println("Employee is present.");
-                    hrs = fullDayHr;
-                }
-                case isPartTime : {
-                    System.out.println("Employee is present part time.");  //condition 2
-                    hrs = partTimeHr;
-                }
-                case isAbsent : hrs = 0;
-            }
-            workingHr = workingHr + hrs;
-            workingDays = workingDays + 1;
-        }
-        int salary = workingHr * wagePerHr;
-        System.out.println("the salary of month is of " + name + " employee is " + salary);
-    }
-}
-
 public class EmpWage {
 
-    public static void main(String[] args) {
-        System.out.println("Welcome To Employee Wage Computation");
-        utilityEmpWage bridgrLabz = new utilityEmpWage();  //create bridgelabz object
-        utilityEmpWage airtel = new utilityEmpWage();  //create airtel object
-        System.out.println("For bridgeLabz employee : ");
-        bridgrLabz.present("bridgeLabz", 20, 25, 180);// 1stcompany details
-        System.out.println("For airtel employee : ");
-        airtel.present("airtel", 25, 22, 150); //2nd company details
+    // create calculatetotalwage method and pass parameters
+    public static void calculateTotalWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
+    {
+        //constant
+        final int PART_TIME = 1;
+        final int FULL_TIME = 2;
+        int totalWage = 0;
+        int workingHrs = 0;
 
+        System.out.println("Details of " + companyName + " employee");
+        System.out.println("-----------------------------------------------------");
+        System.err.println("Wage per hour:" + wagePerHr);
+        System.out.println("Maximum working days:" + maxWorkingDays);
+        System.out.println("Maximum working hours:" + maxWorkingHrs);
+        System.out.printf("%5s     %5s     %5s     %5s\n", "Day", "Workinghrs", "Wage", "Total working hrs");
+
+        /*
+        using for loop check the condition and print the total wage for both companies employee
+         */
+        for (int day = 1, totalWorkingHrs = 0; day <= maxWorkingDays
+                && totalWorkingHrs <= maxWorkingHrs; day++, totalWorkingHrs += workingHrs)
+        {
+            int empType = (int) (Math.random() * 100) % 3;
+            switch (empType)
+            {
+                case FULL_TIME:
+                    workingHrs = 8;
+                    break;
+                case PART_TIME:
+                    workingHrs = 4;
+                    break;
+                default:
+                    workingHrs = 0;
+                    break;
+            }
+
+            // calculate daily empwage
+            int wage = workingHrs * wagePerHr;
+            totalWage += wage; //monthly wage
+            System.out.printf("%5d       %5d      %5d      %5d\n", day, workingHrs, wage, totalWorkingHrs + workingHrs);
+        }
+        System.out.println("Total wage for a month of " + companyName + " employee is " + totalWage + "\n");
     }
-
+    public static void main(String args[])
+    {
+        calculateTotalWage("Amazon", 40, 15, 200);
+        calculateTotalWage("BigBazar", 20, 20, 100);
+    }
 }
