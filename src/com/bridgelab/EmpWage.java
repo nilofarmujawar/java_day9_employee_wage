@@ -1,66 +1,45 @@
 package com.bridgelab;
 
-import java.util.Random;
-
-//uc6
-
-/*
-      Calculate Wages till a condition of total working hours or days is reached for a month
-
- */
-
-class utilityEmpWage {
-    Random rand = new Random();
-    public final int isPresent = 1;
-    public final int isAbsent = 2;
-    public final int isPartTime = 3;
-    public int wagePerHr = 20;
-    public int fullDayHr = 8;
-    public int partTimeHr = 4;
-    public int maxWorkingDays = 20;
-    public int workingDays = 0;
-    public int maxWorkingHr = 100;
-    public int workingHr = 0;
-    public int dailyWage;
-    public int hrs = 0;
-
-    public void present() {
-        /*
-        using while loop
-         */
-        while (workingHr < maxWorkingHr && workingDays < maxWorkingDays) {
-            int check = rand.nextInt(3) + 1;
-
-            /*
-            using switch case for
-             */
-
-            switch (check) {
-
-                case isPresent : {
-                    System.out.println("Employee is present.");   //condition1
-                    hrs = fullDayHr;
-                }
-                case isPartTime : {
-                    System.out.println("Employee is present part time.");   //condition2
-                    hrs = partTimeHr;
-                }
-                case isAbsent : hrs = 0;
-            }
-            workingHr = workingHr + hrs;
-            workingDays = workingDays + 1;
-        }
-        int salary = workingHr * wagePerHr;
-        System.out.println("the salary of month is : " + salary);
-    }
-}
-
 public class EmpWage {
+    public static void main(String args[]) {
+        //constant
+        final int PART_TIME = 1;
+        final int FULL_TIME = 2;
+        final int WAGE_PER_HR = 20;
+        final int MAX_WORKING_DAYS = 20;
+        final int MAX_WORKING_HRS = 100;// adding max working hr for month
 
-    public static void main(String[] args) {
-        System.out.println("Welcome To Employee Wage Computation");
-        utilityEmpWage empWage = new utilityEmpWage();  //create object
-        empWage.present();
+        int totalWage = 0;
+        int workingHrs = 0;
+        System.out.printf("%5s     %5s     %5s     %5s\n", "Day", "Workinghrs", "Wage", "Total working hrs");
+
+        /*
+         using for loop for day, workinghrs, wage, and totalworkinghrs
+         */
+        for (int day = 1, totalWorkingHrs = 0; day <= MAX_WORKING_DAYS
+                && totalWorkingHrs < MAX_WORKING_HRS; day++, totalWorkingHrs += workingHrs) {
+
+            int empType = (int) (Math.random() * 100) % 3;
+            //using switch case for full time and part time working hrs
+
+            switch (empType)
+            {
+                case FULL_TIME:
+                    workingHrs = 8;
+                    break;
+                case PART_TIME:
+                    workingHrs = 4;
+                    break;
+                default:
+                    workingHrs = 0;
+                    break;
+            }
+            //calculate daily empwage
+            int wage = workingHrs * WAGE_PER_HR;
+            totalWage += wage;//monthly emwage
+            System.out.printf("%5d       %5d      %5d      %5d\n", day, workingHrs, wage, totalWorkingHrs + workingHrs);
+
+        }
+        System.out.println("Total wage for a month is " + totalWage);
     }
-
 }
